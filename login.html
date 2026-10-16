@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login - UMKM Nusantara</title>
+
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <header class="navbar">
+
+        <div class="container nav-container">
+
+            <a href="index.html" class="logo">
+                UMKM<span>Nusantara</span>
+            </a>
+
+            <nav class="nav-menu">
+
+                <a href="index.html">
+                    Beranda
+                </a>
+
+                <a href="katalog.html">
+                    Katalog Produk
+                </a>
+
+                <a href="profil.html">
+                    Profil UMKM
+                </a>
+
+                <a href="pemesanan.html">
+                    Pemesanan
+                </a>
+
+                <a href="login.html" class="login-btn active">
+                    Login
+                </a>
+
+            </nav>
+
+            <button class="menu-toggle" id="menuToggle">
+                ☰
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- ================= LOGIN ================= -->
+
+    <main>
+
+        <section class="login-section">
+
+            <div class="login-container">
+
+                <!-- Bagian kiri -->
+
+                <div class="login-info">
+
+                    <p class="section-label">
+                        SELAMAT DATANG
+                    </p>
+
+                    <h1>
+                        Login ke
+                        <span>UMKM Nusantara</span>
+                    </h1>
+
+                    <p>
+                        Masuk ke akun Anda untuk mengelola
+                        pemesanan dan mendapatkan pengalaman
+                        berbelanja yang lebih mudah.
+                    </p>
+
+                    <div class="login-benefits">
+
+                        <div class="benefit-item">
+                            <span>✓</span>
+                            <p>
+                                Melihat riwayat pesanan
+                            </p>
+                        </div>
+
+                        <div class="benefit-item">
+                            <span>✓</span>
+                            <p>
+                                Mempermudah proses pemesanan
+                            </p>
+                        </div>
+
+                        <div class="benefit-item">
+                            <span>✓</span>
+                            <p>
+                                Mendapatkan informasi produk terbaru
+                            </p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Bagian kanan -->
+
+                <div class="login-card">
+
+                    <div class="login-title">
+
+                        <h2>
+                            Login
+                        </h2>
+
+                        <p>
+                            Silakan masukkan akun Anda
+                        </p>
+
+                    </div>
+
+
+                    <form id="loginForm">
+
+
+                        <!-- EMAIL -->
+
+                        <div class="form-group">
+
+                            <label for="email">
+                                Email
+                            </label>
+
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="Masukkan email"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- PASSWORD -->
+
+                        <div class="form-group">
+
+                            <label for="password">
+                                Password
+                            </label>
+
+                            <div class="password-wrapper">
+
+                                <input
+                                    type="password"
+                                    id="password"
+                                    name="password"
+                                    placeholder="Masukkan password"
+                                    required
+                                >
+
+                                <button
+                                    type="button"
+                                    id="togglePassword"
+                                    class="password-toggle"
+                                >
+                                    👁
+                                </button>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- REMEMBER & FORGOT -->
+
+                        <div class="login-options">
+
+                            <label class="remember">
+
+                                <input
+                                    type="checkbox"
+                                    id="remember"
+                                >
+
+                                <span>
+                                    Ingat saya
+                                </span>
+
+                            </label>
+
+                            <a href="#">
+                                Lupa password?
+                            </a>
+
+                        </div>
+
+
+                        <!-- LOGIN BUTTON -->
+
+                        <button
+                            type="submit"
+                            class="login-submit"
+                        >
+                            Login
+                        </button>
+
+
+                    </form>
+
+
+                    <!-- REGISTER -->
+
+                    <div class="register">
+
+                        <p>
+                            Belum memiliki akun?
+                            <a href="#">
+                                Daftar sekarang
+                            </a>
+                        </p>
+
+                    </div>
+
+
+                    <!-- BACK -->
+
+                    <div class="back-home">
+
+                        <a href="index.html">
+                            ← Kembali ke Beranda
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="footer">
+
+        <div class="container footer-container">
+
+            <div class="footer-brand">
+
+                <h3>
+                    UMKM<span>Nusantara</span>
+                </h3>
+
+                <p>
+                    Mendukung produk lokal dan membantu
+                    perkembangan UMKM Indonesia.
+                </p>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <h4>
+                    Navigasi
+                </h4>
+
+                <a href="index.html">
+                    Beranda
+                </a>
+
+                <a href="katalog.html">
+                    Katalog Produk
+                </a>
+
+                <a href="profil.html">
+                    Profil UMKM
+                </a>
+
+                <a href="pemesanan.html">
+                    Pemesanan
+                </a>
+
+            </div>
+
+
+            <div class="footer-contact">
+
+                <h4>
+                    Kontak
+                </h4>
+
+                <p>
+                    📍 Banyuwangi, Jawa Timur
+                </p>
+
+                <p>
+                    📞 08xx-xxxx-xxxx
+                </p>
+
+                <p>
+                    ✉️ info@umkmnusantara.com
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <p>
+                &copy; 2026 UMKM Nusantara.
+                Semua Hak Dilindungi.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <script src="assets/js/logic.js"></script>
+
+</body>
+
+</html>

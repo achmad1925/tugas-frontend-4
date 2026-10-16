@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Katalog Produk - UMKM Nusantara</title>
+
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <header class="navbar">
+
+        <div class="container nav-container">
+
+            <a href="index.html" class="logo">
+                UMKM<span>Nusantara</span>
+            </a>
+
+            <nav class="nav-menu">
+
+                <a href="index.html">
+                    Beranda
+                </a>
+
+                <a href="katalog.html" class="active">
+                    Katalog Produk
+                </a>
+
+                <a href="profil.html">
+                    Profil UMKM
+                </a>
+
+                <a href="pemesanan.html">
+                    Pemesanan
+                </a>
+
+                <a href="login.html" class="login-btn">
+                    Login
+                </a>
+
+            </nav>
+
+            <button class="menu-toggle" id="menuToggle">
+                ☰
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- ================= HEADER KATALOG ================= -->
+
+    <main>
+
+        <section class="catalog-header">
+
+            <div class="container">
+
+                <p class="section-label">
+                    KATALOG UMKM
+                </p>
+
+                <h1>
+                    Temukan Produk Favorit Anda
+                </h1>
+
+                <p>
+                    Jelajahi berbagai produk berkualitas yang
+                    dibuat oleh UMKM lokal.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= SEARCH & FILTER ================= -->
+
+        <section class="catalog-section">
+
+            <div class="container">
+
+                <div class="catalog-tools">
+
+                    <div class="search-box">
+
+                        <input type="text" id="searchProduct" placeholder="Cari nama produk...">
+
+                        <button onclick="searchProduct()">
+                            🔍 Cari
+                        </button>
+
+                    </div>
+
+
+                    <div class="category-filter">
+
+                        <select id="categoryFilter" onchange="filterCategory()">
+
+                            <option value="all">
+                                Semua Kategori
+                            </option>
+
+                            <option value="makanan">
+                                Makanan
+                            </option>
+
+                            <option value="minuman">
+                                Minuman
+                            </option>
+
+                            <option value="kerajinan">
+                                Kerajinan
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ================= DAFTAR PRODUK ================= -->
+
+                <section class="catalog-section" id="products">
+
+                    <div class="container">
+
+                        <div class="catalog-grid">
+
+                            <!-- PRODUK 1 -->
+                            <div class="catalog-card" data-category="makanan">
+
+                                <div class="catalog-image">
+                                    <span>🍌</span>
+                                </div>
+
+                                <div class="catalog-info">
+
+                                    <span class="product-category">
+                                        Makanan
+                                    </span>
+
+                                    <h3>
+                                        Keripik Pisang
+                                    </h3>
+
+                                    <p>
+                                        Keripik pisang renyah dengan rasa gurih
+                                        dan cocok untuk camilan sehari-hari.
+                                    </p>
+
+                                    <div class="catalog-bottom">
+
+                                        <strong>
+                                            Rp15.000
+                                        </strong>
+
+                                        <a href="pemesanan.html" class="btn-small">
+                                            Pesan
+                                        </a>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- PRODUK 2 -->
+                            <div class="catalog-card" data-category="minuman">
+
+                                <div class="catalog-image">
+                                    <span>☕</span>
+                                </div>
+
+                                <div class="catalog-info">
+
+                                    <span class="product-category">
+                                        Minuman
+                                    </span>
+
+                                    <h3>
+                                        Kopi Lokal
+                                    </h3>
+
+                                    <p>
+                                        Kopi lokal pilihan dengan aroma khas dan
+                                        cita rasa yang nikmat.
+                                    </p>
+
+                                    <div class="catalog-bottom">
+
+                                        <strong>
+                                            Rp25.000
+                                        </strong>
+
+                                        <a href="pemesanan.html" class="btn-small">
+                                            Pesan
+                                        </a>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- PRODUK 3 -->
+                            <div class="catalog-card" data-category="makanan">
+
+                                <div class="catalog-image">
+                                    <span>🍰</span>
+                                </div>
+
+                                <div class="catalog-info">
+
+                                    <span class="product-category">
+                                        Makanan
+                                    </span>
+
+                                    <h3>
+                                        Kue Tradisional
+                                    </h3>
+
+                                    <p>
+                                        Aneka kue tradisional dengan cita rasa khas
+                                        dan dibuat menggunakan bahan pilihan.
+                                    </p>
+
+                                    <div class="catalog-bottom">
+
+                                        <strong>
+                                            Rp20.000
+                                        </strong>
+
+                                        <a href="pemesanan.html" class="btn-small">
+                                            Pesan
+                                        </a>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- PRODUK 4 -->
+                            <div class="catalog-card" data-category="kerajinan">
+
+                                <div class="catalog-image">
+                                    <span>👜</span>
+                                </div>
+
+                                <div class="catalog-info">
+
+                                    <span class="product-category">
+                                        Kerajinan
+                                    </span>
+
+                                    <h3>
+                                        Tas Anyaman
+                                    </h3>
+
+                                    <p>
+                                        Tas anyaman buatan tangan yang unik,
+                                        kuat, dan cocok digunakan sehari-hari.
+                                    </p>
+
+                                    <div class="catalog-bottom">
+
+                                        <strong>
+                                            Rp75.000
+                                        </strong>
+
+                                        <a href="pemesanan.html" class="btn-small">
+                                            Pesan
+                                        </a>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- PRODUK 5 -->
+                            <div class="catalog-card" data-category="makanan">
+
+                                <div class="catalog-image">
+                                    <span>🌶️</span>
+                                </div>
+
+                                <div class="catalog-info">
+
+                                    <span class="product-category">
+                                        Makanan
+                                    </span>
+
+                                    <h3>
+                                        Sambal Rumahan
+                                    </h3>
+
+                                    <p>
+                                        Sambal rumahan dengan rasa pedas dan gurih
+                                        yang cocok untuk berbagai jenis makanan.
+                                    </p>
+
+                                    <div class="catalog-bottom">
+
+                                        <strong>
+                                            Rp18.000
+                                        </strong>
+
+                                        <a href="pemesanan.html" class="btn-small">
+                                            Pesan
+                                        </a>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- PRODUK 6 -->
+                            <div class="catalog-card" data-category="minuman">
+
+                                <div class="catalog-image">
+                                    <span>🥤</span>
+                                </div>
+
+                                <div class="catalog-info">
+
+                                    <span class="product-category">
+                                        Minuman
+                                    </span>
+
+                                    <h3>
+                                        Jus Buah Segar
+                                    </h3>
+
+                                    <p>
+                                        Jus buah segar yang dibuat dari buah pilihan
+                                        tanpa mengurangi kesegaran dan rasanya.
+                                    </p>
+
+                                    <div class="catalog-bottom">
+
+                                        <strong>
+                                            Rp12.000
+                                        </strong>
+
+                                        <a href="pemesanan.html" class="btn-small">
+                                            Pesan
+                                        </a>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- PRODUK 7 - BARU -->
+                            <div class="catalog-card" data-category="makanan">
+
+                                <div class="catalog-image">
+                                    <span>🧁</span>
+                                </div>
+
+                                <div class="catalog-info">
+
+                                    <span class="product-category">
+                                        Makanan
+                                    </span>
+
+                                    <h3>
+                                        Brownies Kukus
+                                    </h3>
+
+                                    <p>
+                                        Brownies kukus lembut dengan rasa cokelat
+                                        yang manis dan cocok untuk camilan keluarga.
+                                    </p>
+
+                                    <div class="catalog-bottom">
+
+                                        <strong>
+                                            Rp30.000
+                                        </strong>
+
+                                        <a href="pemesanan.html" class="btn-small">
+                                            Pesan
+                                        </a>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- PRODUK 8 - BARU -->
+                            <div class="catalog-card" data-category="kerajinan">
+
+                                <div class="catalog-image">
+                                    <span>🎋</span>
+                                </div>
+
+                                <div class="catalog-info">
+
+                                    <span class="product-category">
+                                        Kerajinan
+                                    </span>
+
+                                    <h3>
+                                        Kerajinan Bambu
+                                    </h3>
+
+                                    <p>
+                                        Produk kerajinan bambu handmade yang memiliki
+                                        desain unik dan ramah lingkungan.
+                                    </p>
+
+                                    <div class="catalog-bottom">
+
+                                        <strong>
+                                            Rp50.000
+                                        </strong>
+
+                                        <a href="pemesanan.html" class="btn-small">
+                                            Pesan
+                                        </a>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- FORM INPUT PRODUK UMKM -->
+                        <section class="product-form-section">
+                            <div class="container">
+
+                                <div class="section-heading">
+                                    <span class="section-label">TAMBAH DATA</span>
+                                    <h2>Input Produk UMKM</h2>
+                                    <p>Masukkan informasi produk baru untuk ditambahkan ke dataset.</p>
+                                </div>
+
+                                <div class="product-form-layout">
+
+                                    <form id="productForm" class="product-form" novalidate>
+                                        <div class="form-group">
+                                            <label for="productNameInput">Nama Produk</label>
+                                            <input type="text" id="productNameInput"
+                                                placeholder="Contoh: Keripik Singkong" required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="productCategoryInput">Kategori</label>
+                                            <select id="productCategoryInput" required>
+                                                <option value="">Pilih kategori</option>
+                                                <option value="Makanan">Makanan</option>
+                                                <option value="Minuman">Minuman</option>
+                                                <option value="Kerajinan">Kerajinan</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="productPriceInput">Harga (Rp)</label>
+                                            <input type="number" id="productPriceInput" placeholder="Contoh: 15000"
+                                                min="1" step="1" required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="productStockInput">Jumlah Stok</label>
+                                            <input type="number" id="productStockInput" placeholder="Contoh: 20" min="0"
+                                                step="1" required>
+                                        </div>
+
+                                        <button type="submit" class="btn btn-primary">
+                                            Tambahkan Produk
+                                        </button>
+
+                                        <p id="productFeedback" class="product-feedback" role="status"
+                                            aria-live="polite"></p>
+                                    </form>
+
+                                    <!-- LIVE PREVIEW -->
+                                    <div class="product-preview">
+                                        <span class="section-label">LIVE PREVIEW</span>
+                                        <h3>Pratinjau Produk</h3>
+
+                                        <div class="preview-item">
+                                            <span>ID Produk</span>
+                                            <strong id="previewId">Otomatis</strong>
+                                        </div>
+
+                                        <div class="preview-item">
+                                            <span>Nama</span>
+                                            <strong id="previewName">Belum diisi</strong>
+                                        </div>
+
+                                        <div class="preview-item">
+                                            <span>Kategori</span>
+                                            <strong id="previewCategory">Belum dipilih</strong>
+                                        </div>
+
+                                        <div class="preview-item">
+                                            <span>Harga</span>
+                                            <strong id="previewPrice">Rp0</strong>
+                                        </div>
+
+                                        <div class="preview-item">
+                                            <span>Stok</span>
+                                            <strong id="previewStock">0 unit</strong>
+                                        </div>
+
+                                        <p class="preview-note">
+                                            Pratinjau berubah secara otomatis saat data dimasukkan.
+                                        </p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- DAFTAR PRODUK YANG DITAMBAHKAN MELALUI FORM -->
+                        <section class="added-products-section">
+                            <div class="container">
+                                <h2>Produk yang Baru Ditambahkan</h2>
+                                <div id="addedProducts" class="added-products-list">
+                                    <p>Belum ada produk baru yang ditambahkan.</p>
+                                </div>
+                            </div>
+                        </section>
+
+
+                        <!-- PESAN JIKA PRODUK TIDAK DITEMUKAN -->
+                        <div class="no-product" id="noProduct">
+
+                            <span>🔍</span>
+
+                            <h3>
+                                Produk tidak ditemukan
+                            </h3>
+
+                            <p>
+                                Coba gunakan kata kunci atau kategori yang berbeda.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+        </section>
+
+
+                <!-- ================= CTA ================= -->
+
+                <section class="cta">
+
+                    <div class="container cta-container">
+
+                        <div>
+
+                            <h2>
+                                Tertarik dengan Produk Kami?
+                            </h2>
+
+                            <p>
+                                Silakan lakukan pemesanan melalui
+                                halaman pemesanan.
+                            </p>
+
+                        </div>
+
+                        <a href="pemesanan.html" class="btn btn-light">
+                            Pesan Sekarang
+                        </a>
+
+                    </div>
+
+                </section>
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="footer">
+
+        <div class="container footer-container">
+
+            <div class="footer-brand">
+
+                <h3>
+                    UMKM<span>Nusantara</span>
+                </h3>
+
+                <p>
+                    Mendukung produk lokal dan membantu
+                    perkembangan UMKM Indonesia.
+                </p>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <h4>
+                    Navigasi
+                </h4>
+
+                <a href="index.html">
+                    Beranda
+                </a>
+
+                <a href="katalog.html">
+                    Katalog Produk
+                </a>
+
+                <a href="profil.html">
+                    Profil UMKM
+                </a>
+
+                <a href="pemesanan.html">
+                    Pemesanan
+                </a>
+
+            </div>
+
+
+            <div class="footer-contact">
+
+                <h4>
+                    Kontak
+                </h4>
+
+                <p>
+                    📍 Banyuwangi, Jawa Timur
+                </p>
+
+                <p>
+                    📞 08xx-xxxx-xxxx
+                </p>
+
+                <p>
+                    ✉️ info@umkmnusantara.com
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <p>
+                &copy; 2026 UMKM Nusantara.
+                Semua Hak Dilindungi.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <script src="assets/js/logic.js"></script>
+
+</body>
+
+</html>

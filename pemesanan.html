@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Pemesanan - UMKM Nusantara</title>
+
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <header class="navbar">
+
+        <div class="container nav-container">
+
+            <a href="index.html" class="logo">
+                UMKM<span>Nusantara</span>
+            </a>
+
+            <nav class="nav-menu">
+
+                <a href="index.html">
+                    Beranda
+                </a>
+
+                <a href="katalog.html">
+                    Katalog Produk
+                </a>
+
+                <a href="profil.html">
+                    Profil UMKM
+                </a>
+
+                <a href="pemesanan.html" class="active">
+                    Pemesanan
+                </a>
+
+                <a href="login.html" class="login-btn">
+                    Login
+                </a>
+
+            </nav>
+
+            <button class="menu-toggle" id="menuToggle">
+                ☰
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- ================= HEADER ================= -->
+
+    <main>
+
+        <section class="order-header">
+
+            <div class="container">
+
+                <p class="section-label">
+                    PEMESANAN PRODUK
+                </p>
+
+                <h1>
+                    Buat Pesanan Anda
+                </h1>
+
+                <p>
+                    Isi formulir di bawah ini untuk melakukan
+                    pemesanan produk UMKM.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= ORDER SECTION ================= -->
+
+        <section class="order-section">
+
+            <div class="container order-container">
+
+
+                <!-- ================= FORM PEMESANAN ================= -->
+
+                <div class="order-form-container">
+
+                    <div class="form-title">
+
+                        <h2>
+                            Informasi Pemesan
+                        </h2>
+
+                        <p>
+                            Silakan isi data dengan benar.
+                        </p>
+
+                    </div>
+
+
+                    <form id="orderForm">
+
+
+                        <!-- NAMA -->
+
+                        <div class="form-group">
+
+                            <label for="customerName">
+                                Nama Lengkap
+                            </label>
+
+                            <input
+                                type="text"
+                                id="customerName"
+                                name="customerName"
+                                placeholder="Masukkan nama lengkap"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- WHATSAPP -->
+
+                        <div class="form-group">
+
+                            <label for="phone">
+                                Nomor WhatsApp
+                            </label>
+
+                            <input
+                                type="tel"
+                                id="phone"
+                                name="phone"
+                                placeholder="Contoh: 081234567890"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- PRODUK -->
+
+                        <div class="form-group">
+
+                            <label for="product">
+                                Pilih Produk
+                            </label>
+
+                            <select
+                                id="product"
+                                name="product"
+                                required
+                            >
+
+                                <option value="">
+                                    -- Pilih Produk --
+                                </option>
+
+                                <option
+                                    value="Keripik Pisang"
+                                    data-price="15000"
+                                >
+                                    Keripik Pisang - Rp15.000
+                                </option>
+
+                                <option
+                                    value="Kopi Lokal"
+                                    data-price="25000"
+                                >
+                                    Kopi Lokal - Rp25.000
+                                </option>
+
+                                <option
+                                    value="Kue Tradisional"
+                                    data-price="20000"
+                                >
+                                    Kue Tradisional - Rp20.000
+                                </option>
+
+                                <option
+                                    value="Tas Anyaman"
+                                    data-price="75000"
+                                >
+                                    Tas Anyaman - Rp75.000
+                                </option>
+
+                                <option
+                                    value="Sambal Rumahan"
+                                    data-price="18000"
+                                >
+                                    Sambal Rumahan - Rp18.000
+                                </option>
+
+                                <option
+                                    value="Jus Buah Segar"
+                                    data-price="12000"
+                                >
+                                    Jus Buah Segar - Rp12.000
+                                </option>
+
+                                <option
+                                    value="Brownies Kukus"
+                                    data-price="30000"
+                                >
+                                    Brownies Kukus - Rp30.000
+                                </option>
+
+                                <option
+                                    value="Kerajinan Bambu"
+                                    data-price="50000"
+                                >
+                                    Kerajinan Bambu - Rp50.000
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- JUMLAH -->
+
+                        <div class="form-group">
+
+                            <label for="quantity">
+                                Jumlah
+                            </label>
+
+                            <input
+                                type="number"
+                                id="quantity"
+                                name="quantity"
+                                min="1"
+                                value="1"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- ALAMAT -->
+
+                        <div class="form-group">
+
+                            <label for="address">
+                                Alamat Pengiriman
+                            </label>
+
+                            <textarea
+                                id="address"
+                                name="address"
+                                rows="4"
+                                placeholder="Masukkan alamat lengkap..."
+                                required
+                            ></textarea>
+
+                        </div>
+
+
+                        <!-- PEMBAYARAN -->
+
+                        <div class="form-group">
+
+                            <label for="payment">
+                                Metode Pembayaran
+                            </label>
+
+                            <select
+                                id="payment"
+                                name="payment"
+                                required
+                            >
+
+                                <option value="">
+                                    -- Pilih Pembayaran --
+                                </option>
+
+                                <option value="COD">
+                                    COD
+                                </option>
+
+                                <option value="Transfer Bank">
+                                    Transfer Bank
+                                </option>
+
+                                <option value="E-Wallet">
+                                    E-Wallet
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- CATATAN -->
+
+                        <div class="form-group">
+
+                            <label for="notes">
+                                Catatan Pesanan
+                                <span>(Opsional)</span>
+                            </label>
+
+                            <textarea
+                                id="notes"
+                                name="notes"
+                                rows="3"
+                                placeholder="Contoh: Jangan terlalu pedas..."
+                            ></textarea>
+
+                        </div>
+
+
+                        <!-- BUTTON -->
+
+                        <button
+                            type="submit"
+                            class="submit-order"
+                        >
+                            Kirim Pesanan
+                        </button>
+
+
+                    </form>
+
+                </div>
+
+
+                <!-- ================= RINGKASAN PESANAN ================= -->
+
+                <div class="order-summary">
+
+                    <div class="summary-title">
+
+                        <h2>
+                            Ringkasan Pesanan
+                        </h2>
+
+                    </div>
+
+
+                    <div class="summary-product">
+
+                        <span>
+                            Produk
+                        </span>
+
+                        <strong id="summaryProduct">
+                            -
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-row">
+
+                        <span>
+                            Harga
+                        </span>
+
+                        <span id="summaryPrice">
+                            Rp0
+                        </span>
+
+                    </div>
+
+
+                    <div class="summary-row">
+
+                        <span>
+                            Jumlah
+                        </span>
+
+                        <span id="summaryQuantity">
+                            0
+                        </span>
+
+                    </div>
+
+
+                    <div class="summary-divider"></div>
+
+
+                    <div class="summary-total">
+
+                        <span>
+                            Total
+                        </span>
+
+                        <strong id="summaryTotal">
+                            Rp0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-info">
+
+                        <p>
+                            💡 Pastikan data pemesanan sudah
+                            benar sebelum mengirim pesanan.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= CTA ================= -->
+
+        <section class="cta">
+
+            <div class="container cta-container">
+
+                <div>
+
+                    <h2>
+                        Masih Ingin Melihat Produk?
+                    </h2>
+
+                    <p>
+                        Lihat katalog kami untuk menemukan
+                        produk UMKM lainnya.
+                    </p>
+
+                </div>
+
+                <a
+                    href="katalog.html"
+                    class="btn btn-light"
+                >
+                    Kembali ke Katalog
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="footer">
+
+        <div class="container footer-container">
+
+            <div class="footer-brand">
+
+                <h3>
+                    UMKM<span>Nusantara</span>
+                </h3>
+
+                <p>
+                    Mendukung produk lokal dan membantu
+                    perkembangan UMKM Indonesia.
+                </p>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <h4>
+                    Navigasi
+                </h4>
+
+                <a href="index.html">
+                    Beranda
+                </a>
+
+                <a href="katalog.html">
+                    Katalog Produk
+                </a>
+
+                <a href="profil.html">
+                    Profil UMKM
+                </a>
+
+                <a href="pemesanan.html">
+                    Pemesanan
+                </a>
+
+            </div>
+
+
+            <div class="footer-contact">
+
+                <h4>
+                    Kontak
+                </h4>
+
+                <p>
+                    📍 Banyuwangi, Jawa Timur
+                </p>
+
+                <p>
+                    📞 08xx-xxxx-xxxx
+                </p>
+
+                <p>
+                    ✉️ info@umkmnusantara.com
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <p>
+                &copy; 2026 UMKM Nusantara.
+                Semua Hak Dilindungi.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <script src="assets/js/logic.js"></script>
+
+</body>
+
+</html>
