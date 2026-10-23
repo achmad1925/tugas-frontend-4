@@ -32,14 +32,6 @@
                     Katalog Produk
                 </a>
 
-                <a href="profil.html">
-                    Profil UMKM
-                </a>
-
-                <a href="pemesanan.html">
-                    Pemesanan
-                </a>
-
                 <a href="formula.html" class="active">
                     Formulir
                 </a>
@@ -99,8 +91,8 @@
 
                     <div class="form-title">
 
-                        <h2>
-                            Data Produk Baru
+                        <h2 id="formTitle">
+                            Tambah Data Produk
                         </h2>
 
                         <p>
@@ -238,14 +230,28 @@
                         </div>
 
 
-                        <!-- BUTTON -->
+                        <!-- BUTTONS -->
 
-                        <button
-                            type="submit"
-                            class="submit-order"
-                        >
-                            Simpan Data Produk
-                        </button>
+                        <div class="form-actions">
+
+                            <button
+                                type="submit"
+                                class="submit-order"
+                                id="submitProductBtn"
+                            >
+                                Tambah Produk
+                            </button>
+
+                            <button
+                                type="button"
+                                class="cancel-order"
+                                id="cancelEditBtn"
+                                hidden
+                            >
+                                Batal Edit
+                            </button>
+
+                        </div>
 
 
                     </form>
@@ -362,6 +368,78 @@
 
         </section>
 
+
+        <!-- ================= DAFTAR PRODUK (TABEL) ================= -->
+
+        <section class="product-table-section">
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-label">
+                        DAFTAR PRODUK
+                    </span>
+
+                    <h2>
+                        Semua Produk Tersedia
+                    </h2>
+
+                    <p>
+                        Gunakan tombol Edit untuk mengubah data,
+                        atau Hapus untuk mengeluarkan produk dari daftar.
+                    </p>
+
+                </div>
+
+
+                <!-- ================= PENCARIAN TABEL ================= -->
+
+                <div class="table-toolbar">
+
+                    <input
+                        type="text"
+                        id="tableSearch"
+                        class="table-search"
+                        placeholder="Cari produk: nama, kategori, ID..."
+                    >
+
+                    <p class="table-count" id="tableCount"></p>
+
+                </div>
+
+
+                <div class="product-table-wrap">
+
+                    <table class="product-table" id="productTable">
+
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nama Produk</th>
+                                <th>Kategori</th>
+                                <th>Harga</th>
+                                <th>Stok</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="productTableBody">
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+                <p class="table-empty" id="tableEmpty" hidden>
+                    Belum ada produk. Tambahkan data melalui formulir di atas.
+                </p>
+
+            </div>
+
+        </section>
+
     </main>
 
 
@@ -397,14 +475,6 @@
 
                 <a href="katalog.html">
                     Katalog Produk
-                </a>
-
-                <a href="profil.html">
-                    Profil UMKM
-                </a>
-
-                <a href="pemesanan.html">
-                    Pemesanan
                 </a>
 
             </div>

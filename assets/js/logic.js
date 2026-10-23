@@ -17,8 +17,9 @@ if (menuToggle && navMenu) {
 ========================= */
 
 const STORAGE_KEY = "umkmProducts";
+const STORAGE_MODE_KEY = "umkmProductsMode";
 
-const products = [
+const defaultProducts = [
     {
         id: 1,
         name: "Keripik Pisang",
@@ -128,11 +129,50 @@ function writeSavedProducts(list) {
 }
 
 
-let savedProducts = readSavedProducts();
+/*
+   DAFTAR PRODUK AKTIF
+   - mode "full"  : localStorage menyimpan seluruh daftar produk
+   - selain itu   : data lama (hanya produk tambahan), digabung
+                    dengan data awal lalu disimpan ulang sebagai
+                    satu daftar penuh.
+*/
+const products = defaultProducts.slice();
+const storedProducts = readSavedProducts();
 
-savedProducts.forEach(function (product) {
+
+function readStorageMode() {
+    try {
+        return window.localStorage.getItem(STORAGE_MODE_KEY);
+    } catch (error) {
+        return null;
+    }
+}
+
+
+function writeStorageMode(mode) {
+    try {
+        window.localStorage.setItem(STORAGE_MODE_KEY, mode);
+    } catch (error) {
+        /* localStorage tidak tersedia */
+    }
+}
+
+
+function saveProducts() {
+    writeSavedProducts(products);
+    writeStorageMode("full");
+}
+
+
+if (readStorageMode() === "full") {
+    products.length = 0;
+}
+
+storedProducts.forEach(function (product) {
     products.push(product);
 });
+
+saveProducts();
 
 
 /* =========================
@@ -413,13 +453,7 @@ function createCatalogCard(product) {
     const price = document.createElement("strong");
     price.textContent = formatRupiah(product.price);
 
-    const orderLink = document.createElement("a");
-    orderLink.href = "pemesanan.html";
-    orderLink.className = "btn-small";
-    orderLink.textContent = "Pesan";
-
     bottom.appendChild(price);
-    bottom.appendChild(orderLink);
 
     info.appendChild(badge);
     info.appendChild(title);
@@ -433,7 +467,7 @@ function createCatalogCard(product) {
 }
 
 
-function renderSavedProducts() {
+function renderCatalogProducts() {
 
     const grid = document.querySelector(".catalog-grid");
 
@@ -441,53 +475,19 @@ function renderSavedProducts() {
         return;
     }
 
-    savedProducts.forEach(function (product) {
+    grid.innerHTML = "";
+
+    products.forEach(function (product) {
         grid.appendChild(createCatalogCard(product));
     });
-}
 
-
-function displayAddedProduct(product) {
-
-    const list = document.getElementById("addedProducts");
-
-    if (!list) {
-        return;
-    }
-
-    const firstItem = list.firstElementChild;
-
-    if (firstItem && firstItem.tagName === "P") {
-        list.innerHTML = "";
-    }
-
-    const item = document.createElement("article");
-    item.className = "added-product-item";
-
-    const title = document.createElement("h3");
-    title.textContent = `${product.id}. ${product.name}`;
-
-    const category = document.createElement("p");
-    category.textContent = `Kategori: ${product.category}`;
-
-    const price = document.createElement("p");
-    price.textContent = `Harga: ${formatRupiah(product.price)}`;
-
-    const stock = document.createElement("p");
-    stock.textContent = `Stok: ${product.stock} unit`;
-
-    item.appendChild(title);
-    item.appendChild(category);
-    item.appendChild(price);
-    item.appendChild(stock);
-
-    list.insertBefore(item, list.firstChild);
+    applyCatalogFilters();
 }
 
 
 /* =========================
    FORM PRODUK
-   (katalog.html & formula.html)
+   (formula.html)
 ========================= */
 
 let productFormFields = null;
@@ -503,23 +503,12 @@ function initProductForm() {
 
     const fields = {
         form: form,
-        name:
-            document.getElementById("productNameInput") ||
-            document.getElementById("productName"),
-        category:
-            document.getElementById("productCategoryInput") ||
-            document.getElementById("category"),
-        price:
-            document.getElementById("productPriceInput") ||
-            document.getElementById("price"),
-        stock:
-            document.getElementById("productStockInput") ||
-            document.getElementById("stock"),
+        name: document.getElementById("productName"),
+        category: document.getElementById("category"),
+        price: document.getElementById("price"),
+        stock: document.getElementById("stock"),
         description: document.getElementById("description"),
-        feedback:
-            document.getElementById("productFeedback") ||
-            document.getElementById("formFeedback"),
-        previewId: document.getElementById("previewId"),
+        feedback: document.getElementById("formFeedback"),
         previewName: document.getElementById("previewName"),
         previewCategory: document.getElementById("previewCategory"),
         previewDescription: document.getElementById("previewDescription"),
@@ -548,6 +537,12 @@ function initProductForm() {
     });
 
     form.addEventListener("submit", handleProductSubmit);
+
+    const cancelButton = document.getElementById("cancelEditBtn");
+
+    if (cancelButton) {
+        cancelButton.addEventListener("click", cancelEditProduct);
+    }
 
     updateProductPreview();
 }
@@ -646,11 +641,6 @@ function updateProductPreview() {
         values.stockSet;
 
     setPreview(
-        productFormFields.previewId,
-        String(getNextProductId())
-    );
-
-    setPreview(
         productFormFields.previewName,
         values.name || "Belum diisi"
     );
@@ -706,10 +696,7 @@ function showProductFeedback(type, message) {
         return;
     }
 
-    feedback.className =
-        feedback.id === "formFeedback"
-            ? `form-feedback show ${type}`
-            : `product-feedback ${type}`;
+    feedback.className = `form-feedback show ${type}`;
 
     feedback.textContent = message;
 }
@@ -723,41 +710,299 @@ function hideProductFeedback() {
         return;
     }
 
-    feedback.className =
-        feedback.id === "formFeedback"
-            ? "form-feedback"
-            : "product-feedback";
+    feedback.className = "form-feedback";
 
     feedback.textContent = "";
 }
 
 
-function appendProductOption(product) {
+/* =========================
+   AKSI PRODUK: EDIT & HAPUS
+   + TABEL DAFTAR PRODUK
+========================= */
 
-    const select = document.getElementById("product");
+let editingProductId = null;
 
-    if (!select) {
+
+function findProductById(id) {
+
+    for (let i = 0; i < products.length; i++) {
+        if (products[i].id === id) {
+            return products[i];
+        }
+    }
+
+    return null;
+}
+
+
+function renderProductTable() {
+
+    const tbody = document.getElementById("productTableBody");
+
+    if (!tbody) {
         return;
     }
 
-    const exists = Array.prototype.some.call(
-        select.options,
-        function (option) {
-            return option.value === product.name;
+    tbody.innerHTML = "";
+
+    products.forEach(function (product) {
+        tbody.appendChild(createProductRow(product));
+    });
+
+    filterProductTable();
+}
+
+
+/* =========================
+   PENCARIAN PADA TABEL
+========================= */
+
+function filterProductTable() {
+
+    const tbody = document.getElementById("productTableBody");
+    const emptyMessage = document.getElementById("tableEmpty");
+    const countLabel = document.getElementById("tableCount");
+    const searchBox = document.getElementById("tableSearch");
+
+    if (!tbody) {
+        return;
+    }
+
+    const keyword = searchBox
+        ? searchBox.value.trim().toLowerCase()
+        : "";
+
+    const rows = tbody.querySelectorAll("tr");
+
+    let visibleCount = 0;
+
+    rows.forEach(function (row) {
+
+        const haystack = row.getAttribute("data-search") || "";
+
+        const visible =
+            keyword === "" ||
+            haystack.indexOf(keyword) !== -1;
+
+        row.style.display = visible ? "" : "none";
+
+        if (visible) {
+            visibleCount++;
         }
+    });
+
+    if (countLabel) {
+        countLabel.textContent =
+            `Menampilkan ${visibleCount} dari ${products.length} produk`;
+    }
+
+    if (emptyMessage) {
+
+        emptyMessage.hidden = visibleCount > 0;
+
+        emptyMessage.textContent = products.length === 0
+            ? "Belum ada produk. Tambahkan data melalui formulir di atas."
+            : "Produk tidak ditemukan. Coba gunakan kata kunci lain.";
+    }
+}
+
+
+const tableSearchInput = document.getElementById("tableSearch");
+
+if (tableSearchInput) {
+    tableSearchInput.addEventListener("input", filterProductTable);
+}
+
+
+function createProductRow(product) {
+
+    const row = document.createElement("tr");
+    row.setAttribute("data-id", String(product.id));
+
+    row.setAttribute(
+        "data-search",
+        (
+            product.id + " " +
+            product.name + " " +
+            product.category + " " +
+            product.price
+        ).toLowerCase()
     );
 
-    if (exists) {
+    const idCell = document.createElement("td");
+    idCell.textContent = product.id;
+
+    const nameCell = document.createElement("td");
+    nameCell.textContent = product.name;
+
+    const categoryCell = document.createElement("td");
+    categoryCell.textContent = product.category;
+
+    const priceCell = document.createElement("td");
+    priceCell.className = "price-cell";
+    priceCell.textContent = formatRupiah(product.price);
+
+    const stockCell = document.createElement("td");
+    stockCell.textContent = `${product.stock} unit`;
+
+    const actionCell = document.createElement("td");
+
+    const actions = document.createElement("div");
+    actions.className = "table-actions";
+
+    const editButton = document.createElement("button");
+    editButton.type = "button";
+    editButton.className = "table-btn table-btn-edit";
+    editButton.textContent = "Edit";
+    editButton.addEventListener("click", function () {
+        startEditProduct(product.id);
+    });
+
+    const deleteButton = document.createElement("button");
+    deleteButton.type = "button";
+    deleteButton.className = "table-btn table-btn-delete";
+    deleteButton.textContent = "Hapus";
+    deleteButton.addEventListener("click", function () {
+        deleteProduct(product.id);
+    });
+
+    actions.appendChild(editButton);
+    actions.appendChild(deleteButton);
+    actionCell.appendChild(actions);
+
+    row.appendChild(idCell);
+    row.appendChild(nameCell);
+    row.appendChild(categoryCell);
+    row.appendChild(priceCell);
+    row.appendChild(stockCell);
+    row.appendChild(actionCell);
+
+    return row;
+}
+
+
+function setProductFormMode(mode) {
+
+    const isEdit = mode === "edit";
+
+    const title = document.getElementById("formTitle");
+    const submitButton = document.getElementById("submitProductBtn");
+    const cancelButton = document.getElementById("cancelEditBtn");
+
+    if (title) {
+        title.textContent = isEdit
+            ? "Edit Data Produk"
+            : "Tambah Data Produk";
+    }
+
+    if (submitButton) {
+        submitButton.textContent = isEdit
+            ? "Simpan Perubahan"
+            : "Tambah Produk";
+    }
+
+    if (cancelButton) {
+        cancelButton.hidden = !isEdit;
+    }
+}
+
+
+function resetProductForm() {
+
+    if (!productFormFields) {
         return;
     }
 
-    const option = document.createElement("option");
-    option.value = product.name;
-    option.setAttribute("data-price", String(product.price));
-    option.textContent =
-        `${product.name} - ${formatRupiah(product.price)}`;
+    productFormFields.form.reset();
 
-    select.appendChild(option);
+    productFormFields.form
+        .querySelectorAll(".is-invalid")
+        .forEach(function (group) {
+            group.classList.remove("is-invalid");
+        });
+
+    hideProductFeedback();
+    updateProductPreview();
+}
+
+
+function startEditProduct(id) {
+
+    const product = findProductById(id);
+
+    if (!product || !productFormFields) {
+        return;
+    }
+
+    editingProductId = id;
+
+    productFormFields.name.value = product.name;
+    productFormFields.category.value = product.category;
+    productFormFields.price.value = String(product.price);
+    productFormFields.stock.value = String(product.stock);
+
+    if (productFormFields.description) {
+        productFormFields.description.value = product.description || "";
+    }
+
+    setProductFormMode("edit");
+    hideProductFeedback();
+    updateProductPreview();
+
+    productFormFields.form.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+}
+
+
+function cancelEditProduct() {
+
+    editingProductId = null;
+    setProductFormMode("add");
+    resetProductForm();
+}
+
+
+function deleteProduct(id) {
+
+    const product = findProductById(id);
+
+    if (!product) {
+        return;
+    }
+
+    const confirmed = window.confirm(
+        `Hapus produk "${product.name}" dari daftar?`
+    );
+
+    if (!confirmed) {
+        return;
+    }
+
+    const index = products.indexOf(product);
+
+    products.splice(index, 1);
+    saveProducts();
+
+    if (editingProductId === id) {
+        cancelEditProduct();
+    }
+
+    renderProductTable();
+    renderCatalogProducts();
+
+    showProductFeedback(
+        "success",
+        `Produk "${product.name}" telah dihapus dari daftar.`
+    );
+
+    console.log(`
+=== PRODUK DIHAPUS ===
+ID   : ${product.id}
+Nama : ${product.name}
+`);
 }
 
 
@@ -787,6 +1032,58 @@ function handleProductSubmit(event) {
 
     const values = result.values;
 
+    /* =========================
+       MODE EDIT
+    ========================= */
+
+    if (editingProductId !== null) {
+
+        const existingProduct = findProductById(editingProductId);
+
+        if (!existingProduct) {
+            cancelEditProduct();
+            return;
+        }
+
+        existingProduct.name = values.name;
+        existingProduct.category = values.category;
+        existingProduct.price = values.price;
+        existingProduct.stock = values.stock;
+        existingProduct.description = values.description;
+
+        saveProducts();
+
+        const editedName = existingProduct.name;
+        const editedId = existingProduct.id;
+
+        editingProductId = null;
+        setProductFormMode("add");
+        resetProductForm();
+
+        renderProductTable();
+        renderCatalogProducts();
+
+        showProductFeedback(
+            "success",
+            `Berhasil! Produk "${editedName}" (ID ${editedId}) berhasil diperbarui.`
+        );
+
+        console.log(`
+=== PRODUK UMKM DIPERBARUI ===
+ID       : ${editedId}
+Nama     : ${editedName}
+Kategori : ${existingProduct.category}
+Harga    : ${formatRupiah(existingProduct.price)}
+Stok     : ${existingProduct.stock} unit
+`);
+
+        return;
+    }
+
+    /* =========================
+       MODE TAMBAH
+    ========================= */
+
     const newProduct = {
         id: getNextProductId(),
         name: values.name,
@@ -797,18 +1094,12 @@ function handleProductSubmit(event) {
     };
 
     products.push(newProduct);
+    saveProducts();
 
-    savedProducts.push(newProduct);
-    writeSavedProducts(savedProducts);
+    resetProductForm();
 
-    const grid = document.querySelector(".catalog-grid");
-
-    if (grid) {
-        grid.appendChild(createCatalogCard(newProduct));
-    }
-
-    displayAddedProduct(newProduct);
-    appendProductOption(newProduct);
+    renderProductTable();
+    renderCatalogProducts();
 
     showProductFeedback(
         "success",
@@ -824,121 +1115,6 @@ Harga    : ${formatRupiah(newProduct.price)}
 Stok     : ${newProduct.stock} unit
 Nilai stok: ${formatRupiah(newProduct.price * newProduct.stock)}
 `);
-
-    productFormFields.form.reset();
-
-    productFormFields.form
-        .querySelectorAll(".is-invalid")
-        .forEach(function (group) {
-            group.classList.remove("is-invalid");
-        });
-
-    updateProductPreview();
-
-    applyCatalogFilters();
-}
-
-
-/* =========================
-   ORDER SUMMARY (pemesanan)
-========================= */
-
-function updateOrderSummary() {
-
-    const productSelect = document.getElementById("product");
-    const quantityInput = document.getElementById("quantity");
-
-    if (!productSelect || !quantityInput) {
-        return;
-    }
-
-    const selectedOption =
-        productSelect.options[productSelect.selectedIndex];
-
-    const productName = selectedOption.value;
-
-    const price =
-        Number(selectedOption.getAttribute("data-price")) || 0;
-
-    const quantity = Number(quantityInput.value) || 0;
-
-    const total = price * quantity;
-
-    setPreview(
-        document.getElementById("summaryProduct"),
-        productName || "-"
-    );
-
-    setPreview(
-        document.getElementById("summaryPrice"),
-        formatRupiah(price)
-    );
-
-    setPreview(
-        document.getElementById("summaryQuantity"),
-        String(quantity)
-    );
-
-    setPreview(
-        document.getElementById("summaryTotal"),
-        formatRupiah(total)
-    );
-}
-
-
-function initOrderForm() {
-
-    const productSelect = document.getElementById("product");
-    const quantityInput = document.getElementById("quantity");
-    const orderForm = document.getElementById("orderForm");
-
-    if (!productSelect) {
-        return;
-    }
-
-    savedProducts.forEach(appendProductOption);
-
-    productSelect.addEventListener("change", updateOrderSummary);
-
-    if (quantityInput) {
-        quantityInput.addEventListener("input", updateOrderSummary);
-    }
-
-    updateOrderSummary();
-
-    if (!orderForm) {
-        return;
-    }
-
-    orderForm.addEventListener("submit", function (event) {
-
-        event.preventDefault();
-
-        const customerName =
-            document.getElementById("customerName").value;
-
-        const product = productSelect.value;
-        const quantity = quantityInput.value;
-
-        const payment =
-            document.getElementById("payment").value;
-
-        if (!product) {
-            alert("Silakan pilih produk terlebih dahulu.");
-            return;
-        }
-
-        alert(
-            "Pesanan berhasil dibuat!\n\n" +
-            "Nama: " + customerName + "\n" +
-            "Produk: " + product + "\n" +
-            "Jumlah: " + quantity + "\n" +
-            "Pembayaran: " + payment
-        );
-
-        orderForm.reset();
-        updateOrderSummary();
-    });
 }
 
 
@@ -1006,6 +1182,6 @@ if (loginForm) {
    INIT
 ========================= */
 
-renderSavedProducts();
+renderCatalogProducts();
+renderProductTable();
 initProductForm();
-initOrderForm();

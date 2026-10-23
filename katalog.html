@@ -32,12 +32,8 @@
                     Katalog Produk
                 </a>
 
-                <a href="profil.html">
-                    Profil UMKM
-                </a>
-
-                <a href="pemesanan.html">
-                    Pemesanan
+                <a href="formula.html">
+                    Formulir
                 </a>
 
                 <a href="login.html" class="login-btn">
@@ -163,10 +159,6 @@
                                             Rp15.000
                                         </strong>
 
-                                        <a href="pemesanan.html" class="btn-small">
-                                            Pesan
-                                        </a>
-
                                     </div>
 
                                 </div>
@@ -201,10 +193,6 @@
                                         <strong>
                                             Rp25.000
                                         </strong>
-
-                                        <a href="pemesanan.html" class="btn-small">
-                                            Pesan
-                                        </a>
 
                                     </div>
 
@@ -241,10 +229,6 @@
                                             Rp20.000
                                         </strong>
 
-                                        <a href="pemesanan.html" class="btn-small">
-                                            Pesan
-                                        </a>
-
                                     </div>
 
                                 </div>
@@ -279,10 +263,6 @@
                                         <strong>
                                             Rp75.000
                                         </strong>
-
-                                        <a href="pemesanan.html" class="btn-small">
-                                            Pesan
-                                        </a>
 
                                     </div>
 
@@ -319,10 +299,6 @@
                                             Rp18.000
                                         </strong>
 
-                                        <a href="pemesanan.html" class="btn-small">
-                                            Pesan
-                                        </a>
-
                                     </div>
 
                                 </div>
@@ -357,10 +333,6 @@
                                         <strong>
                                             Rp12.000
                                         </strong>
-
-                                        <a href="pemesanan.html" class="btn-small">
-                                            Pesan
-                                        </a>
 
                                     </div>
 
@@ -397,10 +369,6 @@
                                             Rp30.000
                                         </strong>
 
-                                        <a href="pemesanan.html" class="btn-small">
-                                            Pesan
-                                        </a>
-
                                     </div>
 
                                 </div>
@@ -436,10 +404,6 @@
                                             Rp50.000
                                         </strong>
 
-                                        <a href="pemesanan.html" class="btn-small">
-                                            Pesan
-                                        </a>
-
                                     </div>
 
                                 </div>
@@ -447,105 +411,6 @@
                             </div>
 
                         </div>
-
-
-                        <!-- FORM INPUT PRODUK UMKM -->
-                        <section class="product-form-section">
-                            <div class="container">
-
-                                <div class="section-heading">
-                                    <span class="section-label">TAMBAH DATA</span>
-                                    <h2>Input Produk UMKM</h2>
-                                    <p>Masukkan informasi produk baru untuk ditambahkan ke dataset.</p>
-                                </div>
-
-                                <div class="product-form-layout">
-
-                                    <form id="productForm" class="product-form" novalidate>
-                                        <div class="form-group">
-                                            <label for="productNameInput">Nama Produk</label>
-                                            <input type="text" id="productNameInput"
-                                                placeholder="Contoh: Keripik Singkong" required>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="productCategoryInput">Kategori</label>
-                                            <select id="productCategoryInput" required>
-                                                <option value="">Pilih kategori</option>
-                                                <option value="Makanan">Makanan</option>
-                                                <option value="Minuman">Minuman</option>
-                                                <option value="Kerajinan">Kerajinan</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="productPriceInput">Harga (Rp)</label>
-                                            <input type="number" id="productPriceInput" placeholder="Contoh: 15000"
-                                                min="1" step="1" required>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="productStockInput">Jumlah Stok</label>
-                                            <input type="number" id="productStockInput" placeholder="Contoh: 20" min="0"
-                                                step="1" required>
-                                        </div>
-
-                                        <button type="submit" class="btn btn-primary">
-                                            Tambahkan Produk
-                                        </button>
-
-                                        <p id="productFeedback" class="product-feedback" role="status"
-                                            aria-live="polite"></p>
-                                    </form>
-
-                                    <!-- LIVE PREVIEW -->
-                                    <div class="product-preview">
-                                        <span class="section-label">LIVE PREVIEW</span>
-                                        <h3>Pratinjau Produk</h3>
-
-                                        <div class="preview-item">
-                                            <span>ID Produk</span>
-                                            <strong id="previewId">Otomatis</strong>
-                                        </div>
-
-                                        <div class="preview-item">
-                                            <span>Nama</span>
-                                            <strong id="previewName">Belum diisi</strong>
-                                        </div>
-
-                                        <div class="preview-item">
-                                            <span>Kategori</span>
-                                            <strong id="previewCategory">Belum dipilih</strong>
-                                        </div>
-
-                                        <div class="preview-item">
-                                            <span>Harga</span>
-                                            <strong id="previewPrice">Rp0</strong>
-                                        </div>
-
-                                        <div class="preview-item">
-                                            <span>Stok</span>
-                                            <strong id="previewStock">0 unit</strong>
-                                        </div>
-
-                                        <p class="preview-note">
-                                            Pratinjau berubah secara otomatis saat data dimasukkan.
-                                        </p>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </section>
-
-                        <!-- DAFTAR PRODUK YANG DITAMBAHKAN MELALUI FORM -->
-                        <section class="added-products-section">
-                            <div class="container">
-                                <h2>Produk yang Baru Ditambahkan</h2>
-                                <div id="addedProducts" class="added-products-list">
-                                    <p>Belum ada produk baru yang ditambahkan.</p>
-                                </div>
-                            </div>
-                        </section>
 
 
                         <!-- PESAN JIKA PRODUK TIDAK DITEMUKAN -->
@@ -585,14 +450,14 @@
                             </h2>
 
                             <p>
-                                Silakan lakukan pemesanan melalui
-                                halaman pemesanan.
+                                Jelajahi katalog kami dan temukan
+                                berbagai produk lokal berkualitas.
                             </p>
 
                         </div>
 
-                        <a href="pemesanan.html" class="btn btn-light">
-                            Pesan Sekarang
+                        <a href="index.html" class="btn btn-light">
+                            Ke Beranda
                         </a>
 
                     </div>
@@ -634,14 +499,6 @@
 
                 <a href="katalog.html">
                     Katalog Produk
-                </a>
-
-                <a href="profil.html">
-                    Profil UMKM
-                </a>
-
-                <a href="pemesanan.html">
-                    Pemesanan
                 </a>
 
             </div>

@@ -164,16 +164,6 @@ a {
     background-color: #1d4ed8;
 }
 
-.btn-secondary {
-    border: 1px solid #1b365d;
-    color: #1b365d;
-}
-
-.btn-secondary:hover {
-    background-color: #1b365d;
-    color: white;
-}
-
 
 /* =========================
    HERO IMAGE
@@ -328,18 +318,6 @@ a {
     font-size: 18px;
     font-weight: 700;
     color: #2563eb;
-}
-
-.order-btn {
-    padding: 8px 15px;
-    border-radius: 6px;
-    background-color: #1b365d;
-    color: white;
-    font-size: 14px;
-}
-
-.order-btn:hover {
-    background-color: #2563eb;
 }
 
 .view-all {
@@ -708,34 +686,6 @@ a {
 .catalog-bottom strong {
     color: #2563eb;
     font-size: 18px;
-}
-
-.btn-small {
-    padding: 9px 17px;
-    border-radius: 7px;
-    background-color: #2563eb;
-    color: white;
-    font-size: 14px;
-    font-weight: 600;
-    transition: 0.3s;
-}
-
-.btn-small:hover {
-    background-color: #1b365d;
-}
-
-.order-btn {
-    padding: 9px 17px;
-    border-radius: 7px;
-    background-color: #1b365d;
-    color: white;
-    font-size: 14px;
-    font-weight: 600;
-    transition: 0.3s;
-}
-
-.order-btn:hover {
-    background-color: #2563eb;
 }
 
 
@@ -1395,98 +1345,8 @@ a {
 
 }
 
-/* ========================================
-PROFIL UMKM
-======================================== */
-
-.profile-header {
-background: linear-gradient(
-135deg,
-#1B365D,
-#2563EB
-);
-color: white;
-padding: 80px 0;
-text-align: center;
-}
-
 .profile-header .section-label {
 color: white;
-}
-
-.profile-header h1 {
-font-size: 42px;
-margin: 15px 0;
-}
-
-.profile-header p {
-max-width: 650px;
-margin: 0 auto;
-line-height: 1.8;
-opacity: 0.9;
-}
-
-/* ========================================
-ABOUT PROFILE
-======================================== */
-
-.profile-section {
-padding: 80px 0;
-background: #FFFFFF;
-}
-
-.profile-about {
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 60px;
-align-items: center;
-}
-
-.profile-image-placeholder {
-min-height: 400px;
-background: #F8FAFC;
-border: 2px dashed #CBD5E1;
-border-radius: 20px;
-
-
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-
-color: #64748B;
-
-
-}
-
-.profile-image-placeholder span {
-font-size: 80px;
-margin-bottom: 15px;
-}
-
-.profile-image-placeholder p {
-font-size: 18px;
-}
-
-.profile-content h2 {
-font-size: 36px;
-color: #1B365D;
-margin: 15px 0 20px;
-}
-
-.profile-content p {
-color: #64748B;
-line-height: 1.8;
-margin-bottom: 15px;
-}
-
-/* ========================================
-VISI MISI
-======================================== */
-
-.vision-section {
-padding: 80px 0;
-background: #F8FAFC;
 }
 
 .section-heading {
@@ -1510,200 +1370,6 @@ margin: 12px 0;
 
 .section-heading p {
 color: #64748B;
-}
-
-.vision-grid {
-display: grid;
-grid-template-columns: repeat(2, 1fr);
-gap: 30px;
-}
-
-.vision-card {
-background: #FFFFFF;
-padding: 40px;
-border-radius: 18px;
-box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
-}
-
-.vision-icon {
-width: 60px;
-height: 60px;
-
-display: flex;
-justify-content: center;
-align-items: center;
-
-background: #EFF6FF;
-border-radius: 15px;
-
-font-size: 28px;
-margin-bottom: 20px;
-
-
-}
-
-.vision-card h3 {
-color: #1B365D;
-font-size: 24px;
-margin-bottom: 15px;
-}
-
-.vision-card p {
-color: #64748B;
-line-height: 1.8;
-}
-
-.vision-card ul {
-padding-left: 20px;
-color: #64748B;
-line-height: 2;
-}
-
-/* ========================================
-KEUNGGULAN
-======================================== */
-
-.advantages-section {
-padding: 80px 0;
-background: #FFFFFF;
-}
-
-.advantages-grid {
-display: grid;
-grid-template-columns: repeat(4, 1fr);
-gap: 25px;
-}
-
-.advantage-card {
-padding: 30px;
-background: #F8FAFC;
-border-radius: 18px;
-text-align: center;
-transition: 0.3s;
-}
-
-.advantage-card:hover {
-transform: translateY(-6px);
-box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-}
-
-.advantage-icon {
-font-size: 40px;
-margin-bottom: 15px;
-}
-
-.advantage-card h3 {
-color: #1B365D;
-font-size: 20px;
-margin-bottom: 12px;
-}
-
-.advantage-card p {
-color: #64748B;
-line-height: 1.7;
-font-size: 14px;
-}
-
-/* ========================================
-CONTACT
-======================================== */
-
-.contact-section {
-padding: 80px 0;
-background: #F8FAFC;
-}
-
-.contact-grid {
-display: grid;
-grid-template-columns: repeat(4, 1fr);
-gap: 20px;
-}
-
-.contact-card {
-background: #FFFFFF;
-padding: 30px 20px;
-border-radius: 18px;
-text-align: center;
-box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
-}
-
-.contact-icon {
-font-size: 32px;
-margin-bottom: 15px;
-}
-
-.contact-card h3 {
-color: #1B365D;
-margin-bottom: 12px;
-}
-
-.contact-card p {
-color: #64748B;
-line-height: 1.7;
-font-size: 14px;
-}
-
-/* ========================================
-RESPONSIVE PROFIL
-======================================== */
-
-@media (max-width: 900px) {
-
-
-.profile-about {
-    grid-template-columns: 1fr;
-    gap: 40px;
-}
-
-.vision-grid {
-    grid-template-columns: 1fr;
-}
-
-.advantages-grid {
-    grid-template-columns: repeat(2, 1fr);
-}
-
-.contact-grid {
-    grid-template-columns: repeat(2, 1fr);
-}
-
-.profile-header h1 {
-    font-size: 34px;
-}
-
-
-}
-
-@media (max-width: 600px) {
-
-
-.profile-header {
-    padding: 60px 20px;
-}
-
-.profile-header h1 {
-    font-size: 30px;
-}
-
-.profile-section,
-.vision-section,
-.advantages-section,
-.contact-section {
-    padding: 60px 0;
-}
-
-.profile-content h2 {
-    font-size: 28px;
-}
-
-.advantages-grid,
-.contact-grid {
-    grid-template-columns: 1fr;
-}
-
-.vision-card {
-    padding: 30px 25px;
-}
 }
 
 /* =========================
@@ -1766,32 +1432,6 @@ RESPONSIVE PROFIL
     color: #166534;
 }
 
- 
-/* =====================================
-   FORM INPUT PRODUK UMKM
-===================================== */
-
-.product-form-section,
-.added-products-section {
-    padding: 60px 0;
-    background: #F8FAFC;
-}
-
-.product-form-layout {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 30px;
-    align-items: start;
-}
-
-.product-form,
-.product-preview {
-    padding: 30px;
-    background: #FFFFFF;
-    border-radius: 16px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
-}
-
 .product-form .form-group {
     display: flex;
     flex-direction: column;
@@ -1799,133 +1439,155 @@ RESPONSIVE PROFIL
     margin-bottom: 20px;
 }
 
-.product-form label {
-    color: #1B365D;
-    font-weight: 600;
-}
 
-.product-form input,
-.product-form select {
-    width: 100%;
-    padding: 12px 14px;
-    border: 1px solid #CBD5E1;
-    border-radius: 8px;
-    font: inherit;
-    color: #2D3748;
-    background: #FFFFFF;
-}
+/* =========================
+   FORM ACTIONS (TAMBAH / EDIT)
+========================= */
 
-.product-form input:focus,
-.product-form select:focus {
-    outline: 2px solid #2563EB;
-    border-color: #2563EB;
-}
-
-.product-form button {
-    width: 100%;
-    border: none;
-    cursor: pointer;
-    font: inherit;
-}
-
-.product-feedback {
-    margin-top: 15px;
-    padding: 0;
-    border-radius: 8px;
-    font-size: 14px;
-    line-height: 1.6;
-}
-
-.product-feedback.success,
-.product-feedback.error {
-    padding: 12px;
-}
-
-.product-feedback.success {
-    color: #166534;
-    background: #DCFCE7;
-}
-
-.product-feedback.error {
-    color: #991B1B;
-    background: #FEE2E2;
-}
-
-/* LIVE PREVIEW */
-
-.product-preview h3 {
-    color: #1B365D;
-    font-size: 24px;
-    margin: 12px 0 20px;
-}
-
-.preview-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 15px;
-    padding: 14px 0;
-    border-bottom: 1px solid #E2E8F0;
-}
-
-.preview-item span {
-    color: #64748B;
-}
-
-.preview-item strong {
-    color: #1B365D;
-    text-align: right;
-    overflow-wrap: anywhere;
-}
-
-.preview-note {
-    margin-top: 20px;
-    color: #64748B;
-    font-size: 13px;
-    line-height: 1.6;
-}
-
-/* DAFTAR PRODUK BARU */
-
-.added-products-section {
-    background: #FFFFFF;
-}
-
-.added-products-section h2 {
-    margin-bottom: 20px;
-    color: #1B365D;
-}
-
-.added-products-list {
+.form-actions {
     display: grid;
     gap: 12px;
 }
 
-.added-product-item {
-    padding: 18px;
-    border: 1px solid #E2E8F0;
-    border-radius: 10px;
-    background: #F8FAFC;
+.cancel-order {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #D1D5DB;
+    border-radius: 8px;
+    background-color: #FFFFFF;
+    color: #374151;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
-.added-product-item h3 {
+.cancel-order:hover {
+    background-color: #F3F4F6;
+}
+
+
+/* =========================
+   TABEL DAFTAR PRODUK
+========================= */
+
+.product-table-section {
+    padding: 0 0 70px;
+}
+
+.table-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.table-search {
+    flex: 1;
+    min-width: 240px;
+    max-width: 420px;
+    padding: 12px 14px;
+    border: 1px solid #D1D5DB;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 14px;
+    outline: none;
+    background-color: #FFFFFF;
+}
+
+.table-search:focus {
+    border-color: #2563EB;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.table-count {
+    color: #6B7280;
+    font-size: 14px;
+}
+
+.product-table-wrap {
+    overflow-x: auto;
+    background-color: #FFFFFF;
+    border: 1px solid #E5E7EB;
+    border-radius: 12px;
+}
+
+.product-table {
+    width: 100%;
+    min-width: 660px;
+    border-collapse: collapse;
+}
+
+.product-table th,
+.product-table td {
+    padding: 14px 18px;
+    text-align: left;
+    font-size: 14px;
+    border-bottom: 1px solid #E5E7EB;
+    color: #374151;
+}
+
+.product-table thead th {
+    background-color: #F8FAFC;
     color: #1B365D;
-    margin-bottom: 8px;
+    font-weight: 700;
+    white-space: nowrap;
 }
 
-.added-product-item p {
-    color: #64748B;
-    margin: 4px 0;
-    line-height: 1.6;
+.product-table tbody tr:last-child td {
+    border-bottom: none;
 }
 
-@media (max-width: 768px) {
-    .product-form-layout {
-        grid-template-columns: 1fr;
-    }
+.product-table tbody tr:hover {
+    background-color: #F8FAFC;
+}
 
-    .product-form,
-    .product-preview {
-        padding: 22px;
-    }
+.product-table .price-cell {
+    white-space: nowrap;
+    font-weight: 600;
+    color: #1B365D;
+}
+
+.table-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.table-btn {
+    padding: 7px 14px;
+    border: none;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.table-btn-edit {
+    background-color: #EFF6FF;
+    color: #2563EB;
+}
+
+.table-btn-edit:hover {
+    background-color: #2563EB;
+    color: #FFFFFF;
+}
+
+.table-btn-delete {
+    background-color: #FEF2F2;
+    color: #DC2626;
+}
+
+.table-btn-delete:hover {
+    background-color: #DC2626;
+    color: #FFFFFF;
+}
+
+.table-empty {
+    text-align: center;
+    color: #6B7280;
+    padding-top: 25px;
 }
