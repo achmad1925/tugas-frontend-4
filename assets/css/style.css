@@ -688,6 +688,23 @@ a {
     font-size: 18px;
 }
 
+.order-btn {
+    padding: 8px 18px;
+    border: none;
+    border-radius: 6px;
+    background-color: #2563eb;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.order-btn:hover {
+    background-color: #1b365d;
+}
+
 
 /* =========================
    NO PRODUCT

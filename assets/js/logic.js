@@ -16,9 +16,6 @@ if (menuToggle && navMenu) {
    1. DATASET PRODUK UMKM
 ========================= */
 
-const STORAGE_KEY = "umkmProducts";
-const STORAGE_MODE_KEY = "umkmProductsMode";
-
 const defaultProducts = [
     {
         id: 1,
@@ -80,99 +77,12 @@ const defaultProducts = [
 
 
 /* =========================================
-   PRODUK SIMPANAN (localStorage)
-   Produk baru tersimpan agar muncul
-   kembali saat halaman dibuka ulang.
+   PRODUK AKTIF
+   Data dimuat ulang dari kode setiap
+   kali halaman dibuka (tanpa penyimpanan).
 ========================================= */
 
-function readSavedProducts() {
-
-    try {
-        const raw = window.localStorage.getItem(STORAGE_KEY);
-
-        if (!raw) {
-            return [];
-        }
-
-        const data = JSON.parse(raw);
-
-        if (!Array.isArray(data)) {
-            return [];
-        }
-
-        return data.filter(function (item) {
-            return item &&
-                typeof item.id === "number" &&
-                typeof item.name === "string" &&
-                typeof item.category === "string" &&
-                typeof item.price === "number" &&
-                typeof item.stock === "number";
-        });
-
-    } catch (error) {
-        return [];
-    }
-}
-
-
-function writeSavedProducts(list) {
-
-    try {
-        window.localStorage.setItem(
-            STORAGE_KEY,
-            JSON.stringify(list)
-        );
-    } catch (error) {
-        /* localStorage tidak tersedia:
-           data tetap hidup di sesi ini. */
-    }
-}
-
-
-/*
-   DAFTAR PRODUK AKTIF
-   - mode "full"  : localStorage menyimpan seluruh daftar produk
-   - selain itu   : data lama (hanya produk tambahan), digabung
-                    dengan data awal lalu disimpan ulang sebagai
-                    satu daftar penuh.
-*/
 const products = defaultProducts.slice();
-const storedProducts = readSavedProducts();
-
-
-function readStorageMode() {
-    try {
-        return window.localStorage.getItem(STORAGE_MODE_KEY);
-    } catch (error) {
-        return null;
-    }
-}
-
-
-function writeStorageMode(mode) {
-    try {
-        window.localStorage.setItem(STORAGE_MODE_KEY, mode);
-    } catch (error) {
-        /* localStorage tidak tersedia */
-    }
-}
-
-
-function saveProducts() {
-    writeSavedProducts(products);
-    writeStorageMode("full");
-}
-
-
-if (readStorageMode() === "full") {
-    products.length = 0;
-}
-
-storedProducts.forEach(function (product) {
-    products.push(product);
-});
-
-saveProducts();
 
 
 /* =========================
@@ -453,7 +363,16 @@ function createCatalogCard(product) {
     const price = document.createElement("strong");
     price.textContent = formatRupiah(product.price);
 
+    const orderButton = document.createElement("button");
+    orderButton.type = "button";
+    orderButton.className = "order-btn";
+    orderButton.textContent = "Pesan";
+    orderButton.addEventListener("click", function () {
+        orderProduct(product);
+    });
+
     bottom.appendChild(price);
+    bottom.appendChild(orderButton);
 
     info.appendChild(badge);
     info.appendChild(title);
@@ -464,6 +383,56 @@ function createCatalogCard(product) {
     card.appendChild(info);
 
     return card;
+}
+
+
+function orderProduct(product) {
+
+    const quantity = window.prompt(
+        `Pesan "${product.name}"\n` +
+        `Harga: ${formatRupiah(product.price)}\n` +
+        `Stok tersedia: ${product.stock} unit\n\n` +
+        `Masukkan jumlah yang ingin dipesan:`,
+        "1"
+    );
+
+    if (quantity === null) {
+        return;
+    }
+
+    const qty = Number(quantity);
+
+    if (!Number.isSafeInteger(qty) || qty <= 0) {
+        window.alert("Jumlah pesanan tidak valid.");
+        return;
+    }
+
+    if (qty > product.stock) {
+        window.alert(
+            `Stok "${product.name}" tidak mencukupi.\n` +
+            `Stok tersisa: ${product.stock} unit.`
+        );
+        return;
+    }
+
+    const total = product.price * qty;
+
+    window.alert(
+        `Pesanan berhasil!\n\n` +
+        `Produk: ${product.name}\n` +
+        `Jumlah: ${qty} unit\n` +
+        `Harga satuan: ${formatRupiah(product.price)}\n` +
+        `Total: ${formatRupiah(total)}\n\n` +
+        `Terima kasih!`
+    );
+
+    console.log(`
+=== PESANAN BARU ===
+Produk      : ${product.name}
+Jumlah      : ${qty} unit
+Harga satuan: ${formatRupiah(product.price)}
+Total       : ${formatRupiah(total)}
+`);
 }
 
 
@@ -736,6 +705,13 @@ function findProductById(id) {
 }
 
 
+function renumberProductIds() {
+    products.forEach(function (product, index) {
+        product.id = index + 1;
+    });
+}
+
+
 function renderProductTable() {
 
     const tbody = document.getElementById("productTableBody");
@@ -984,10 +960,12 @@ function deleteProduct(id) {
     const index = products.indexOf(product);
 
     products.splice(index, 1);
-    saveProducts();
+    renumberProductIds();
 
     if (editingProductId === id) {
         cancelEditProduct();
+    } else if (editingProductId !== null && editingProductId > id) {
+        editingProductId -= 1;
     }
 
     renderProductTable();
@@ -1051,8 +1029,6 @@ function handleProductSubmit(event) {
         existingProduct.stock = values.stock;
         existingProduct.description = values.description;
 
-        saveProducts();
-
         const editedName = existingProduct.name;
         const editedId = existingProduct.id;
 
@@ -1094,7 +1070,6 @@ Stok     : ${existingProduct.stock} unit
     };
 
     products.push(newProduct);
-    saveProducts();
 
     resetProductForm();
 
